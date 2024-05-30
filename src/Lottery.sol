@@ -26,7 +26,7 @@ contract Lottery is VRFConsumerBaseV2, AutomationCompatibleInterface {
 
     uint256 private immutable i_enteranceFee;
     address payable[] private players;
-    LotteryState private s_LotteryState;
+    LotteryState internal s_LotteryState;
 
     VRFCoordinatorV2Interface private immutable i_vrfCoordinator; // Random number verification
     bytes32 private immutable i_gaslane;
@@ -127,6 +127,13 @@ contract Lottery is VRFConsumerBaseV2, AutomationCompatibleInterface {
 
     function getPreviousWinnersList() public view returns (address[] memory) {
         return s_Winners;
+    }
+
+    function getLotteryState() public view returns (LotteryState) {
+        return s_LotteryState;
+    }
+    function getInterval() public pure  returns (uint256) {
+        return interval;
     }
 
     function getlatestTimestap() public view returns(uint){
